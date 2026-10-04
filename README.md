@@ -1,1 +1,1 @@
-Estudo de Python usando métodos básicos e exercícios
+Studying Python using basic methods and exercises
