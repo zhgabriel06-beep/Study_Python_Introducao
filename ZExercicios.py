@@ -1,4 +1,5 @@
 import random
+from re import S
 import time
 
 # Verifica se o número digitado pelo usuário é igual ao número gerado aleatoriamente
@@ -152,7 +153,7 @@ for _ in range(c):
 
     # Numero primo
 divider = 0
-number = int(input("Digete um numero :\n"))
+number = int(input("Digite um numero :\n"))
 for i in range(1, number + 1):
     if number % i == 0:
         divider += 1
@@ -328,3 +329,137 @@ while n != 4:
         print("Saindo do programa...")
     else:
         print("Opção inválida. Tente novamente.")
+
+# tuplas
+
+pessoa1 = ("João", 25, "Masculino")
+pessoa2 = ("Maria", 30, "Feminino")
+print(f"Nome: {pessoa1[0]}")
+print(f"Nome: {pessoa2[0]}")
+
+# Mostrar quem tem a maior idade
+
+if pessoa1[1] > pessoa2[1]:
+    print(f"{pessoa1[0]} é mais velho(a) que {pessoa2[0]}.")
+elif pessoa1[1] < pessoa2[1]:
+    print(f"{pessoa2[0]} é mais velho(a) que {pessoa1[0]}.")
+else:
+    print(f"{pessoa1[0]} e {pessoa2[0]} têm a mesma idade.")
+
+# Mostrar o numero por extenso
+numeros = {
+    0: "zero",
+    1: "um",
+    2: "dois",
+    3: "três",
+    4: "quatro",
+    5: "cinco",
+    6: "seis",
+    7: "sete",
+    8: "oito",
+    9: "nove",
+    10: "dez",
+}
+num = int(input("Digite um número de 0 a 10: "))
+while num < 0 or num > 10:
+    num = int(input("Número inválido. Digite um número de 0 a 10: "))
+print(f"O número {num} por extenso é '{numeros[num]}'.")
+
+# Gerar numeros aleatórios e armazenar em uma lista
+numeros_aleatorios = []
+for i in range(10):
+    numeros_aleatorios.append(random.randint(1, 100))
+print(f"Números aleatórios gerados: {numeros_aleatorios}")
+print(f"Números aleatórios em ordem crescente: {sorted(numeros_aleatorios)}")
+
+# Mostrar as vogais de uma tupla
+tupla = {"Gabriel", "João", "Maria", "Ana", "Pedro"}
+vogais = {"a", "e", "i", "o", "u"}
+print(
+    f"Vogais encontradas na tupla: {', '.join(vogais & {char for item in tupla for char in item.lower()})}"
+)
+for item in tupla:
+    for char in item.lower():
+        if char in vogais:
+            print(char)
+
+# Maior e menor valor em uma lista
+# Index é usado para mostrar a posição do maior e menor valor na lista
+valores = []
+for i in range(5):
+    valores.append(int(input(f"Digite o {i + 1}º valor: ")))
+print(f"Você digitou os valores: {valores}")
+print(
+    f"O maior valor digitado foi {max(valores)} na posição {valores.index(max(valores))}."
+)  # Exibe o maior valor e sua posição
+print(
+    f"O menor valor digitado foi {min(valores)} na posição {valores.index(min(valores))}."
+)  # Exibe o menor valor e sua posição
+
+# Verifica se o numero já foi digitado e se não foi, adiciona na lista
+valores = []
+for i in range(5):
+    num = int(input(f"Digite o {i + 1}º valor: "))
+    if num not in valores:
+        valores.append(num)
+print(f"Você digitou os valores: {valores}")
+
+# Colocar os valores em ordem crescente sem usar sort() e sorted()
+valores = []
+for i in range(5):
+    num = int(input(f"Digite o {i + 1}º valor: "))
+    if i == 0 or num > valores[-1]:
+        valores.append(num)
+    else:
+        pos = 0
+        while pos < len(valores):
+            if num <= valores[pos]:
+                valores.insert(pos, num)
+                break
+            pos += 1
+print(f"Você digitou os valores: {valores}")
+
+# Cadastrar pessoas com nome e idade em uma lista de listas
+galera = []
+escolha = "S"
+while escolha == "S":
+    nome = input("Digite o nome da pessoa: ")
+    idade = int(input("Digite a idade da pessoa: "))
+    galera.append([nome, idade])
+    escolha = input("Deseja continuar? [S/N] ").upper()
+
+print(f"Você cadastrou {len(galera)} pessoas.")
+# Verificar a pessoa mais pessada
+if galera:
+    maior_idade = max(galera, key=lambda x: x[1])[1]
+    mais_velho = [p[0] for p in galera if p[1] == maior_idade]
+    print(f"A pessoa mais velha tem {maior_idade} anos e é: {', '.join(mais_velho)}.")
+# Matriz de 3x3 com numeros aleatorios
+matriz = []
+for i in range(3):
+    linha = []
+    for j in range(3):
+        linha.append(random.randint(1, 10))
+    matriz.append(linha)
+print("Matriz 3x3:")
+for linha in matriz:
+    print(linha)
+# Soma de todos os valores pares da matriz
+soma_pares = sum(num for linha in matriz for num in linha if num % 2 == 0)
+print(f"A soma de todos os valores pares da matriz é: {soma_pares}")
+
+# Soma de todos os valores da terceira coluna da matriz
+soma_terceira_coluna = sum(linha[2] for linha in matriz)
+print(
+    f"A soma de todos os valores da terceira coluna da matriz é: {soma_terceira_coluna}"
+)
+
+# 4 Jogadores jogam um dado e tem resultados aleatórios.
+# Guarde esses resultados em um dicionário. No final, coloque esse dicionário em ordem, sabendo que o vencedor tirou o maior número no dado.
+jogadores = {}
+for i in range(1, 5):
+    jogadores[f"Jogador {i}"] = random.randint(1, 6)
+print("Resultados dos jogadores:")
+for jogador, resultado in jogadores.items():
+    print(f"{jogador}: {resultado}")
+jogadores_ordenados = sorted(jogadores.items(), key=lambda x: x[1], reverse=True)
